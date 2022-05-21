@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import React, {useState} from "react";
 import './App.css';
+import Count1 from './Counte/Count1';
+import data from  "./data.json";
 
 function App() {
+  const [index , setIndex] = useState(0);
+ const handleChalenge = (etat) => {
+   if ( etat === "-" && index !== 0  ){ setIndex(index - 1);}
+   if ( etat === "-" && index == 0){ setIndex(data.length - 1);}
+   if ( etat === "+" && index + 1 < data.length){ setIndex(index +1);}
+ }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="bg-Count1"></div>
+      <Count1 data = {data[index]}/>
+      <div className="buttons" >
+        <button onClick={() => handleChalenge("-")} className="previous">-</button> 
+        <button onClick={() => handleChalenge("+")} className="next"> +</button> 
+     </div>
+   </div>  
+     
   );
 }
 
